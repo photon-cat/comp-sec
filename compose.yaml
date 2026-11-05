@@ -1,0 +1,14 @@
+services:
+  lab:
+    build: .
+    image: comp-sec-lab
+    platform: linux/amd64
+    container_name: comp-sec-lab
+    hostname: lab
+    volumes:
+      - ./work:/work
+    # needed for gdb/strace and for disabling ASLR with `setarch -R`
+    cap_add: [SYS_PTRACE]
+    security_opt: [seccomp=unconfined]
+    stdin_open: true
+    tty: true
